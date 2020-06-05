@@ -4,13 +4,14 @@ import (
 	"crypto/rand"
 	"errors"
 	"fmt"
-	"github.com/aclindsa/xml"
-	"golang.org/x/text/currency"
 	"math/big"
 	"regexp"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/aclindsa/xml"
+	"golang.org/x/text/currency"
 )
 
 // Int provides helper methods to unmarshal int64 values from SGML/XML
@@ -63,6 +64,7 @@ func (a *Amount) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
 	// The OFX spec allows the start of the fractional amount to be delineated
 	// by a comma, so fix that up before attempting to parse it into big.Rat
 	value = strings.Replace(value, ",", ".", 1)
+	value = strings.Replace(value, "nu", "0", 1)
 
 	if _, ok := a.SetString(value); !ok {
 		return errors.New("Failed to parse OFX amount")

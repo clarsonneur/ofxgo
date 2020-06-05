@@ -2,10 +2,11 @@ package ofxgo
 
 import (
 	"fmt"
-	"github.com/aclindsa/xml"
 	"reflect"
 	"testing"
 	"time"
+
+	"github.com/aclindsa/xml"
 )
 
 func getTypeName(i interface{}) string {
@@ -116,6 +117,7 @@ func TestUnmarshalAmount(t *testing.T) {
 	unmarshalHelper2(t, "+8.192", &a, &overwritten, eq)
 	a.SetInt64(0)
 	unmarshalHelper2(t, "0", &a, &overwritten, eq)
+	unmarshalHelper2(t, "nu", &a, &overwritten, eq)
 	unmarshalHelper2(t, "+0", &a, &overwritten, eq)
 	unmarshalHelper2(t, "-0", &a, &overwritten, eq)
 	a.SetInt64(-19487135)
